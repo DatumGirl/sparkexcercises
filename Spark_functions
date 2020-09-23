@@ -1,0 +1,79 @@
+orders =spark.read.csv("/public/retail_db/orders")
+orders.describe().show()
+orders.count()
+ orders.printSchema()
+ orders.describe().show()
+ orders.withColumn("order_id",orders.order_id.cast("int") )
+ orders.withColumn("customer_id","order_id")
+ orders.withColumn("order_id",orders.order_id.cast((IntegerrType())))
+ orders=spark.read.format("csv").options(sep,",").schema("order_id int,order_date string , order_status string ").load("path")
+ orders=spark.read.text("path")
+ orders.filter("order_date like '2013-07' and order_satatus ='complete'")
+ order.where('order_status =completed or orderstatus =pending ')
+
+ Hive 
+ -----
+ hive
+ use retaildb
+ show tables 
+ select * from orders limit 10
+ orders =spark.read.table("retail_orders")
+ orders.printSchema()
+ orders.show()
+ help(spark.read.table)
+ spark.sql('select * from retail.orders').show()
+
+ data from JDBC 
+ option 1
+ orderItems=spark.read.format("jdbc"). option("url","jdbc url")
+ option (user, retail user)
+ option(password,retail user)
+ load()
+option2
+orderitems =spark.read.jdbc(url,credentails)
+orderitems.printschema()
+ 
+
+ orderItems=spark.read.format("jdbc"). option("url","jdbc url")
+ option (user, retail user)
+ option(password,retail user)
+ option(partitionColumn,"orderid")
+ option('lowerbound",10000)
+ option("upperbound",20000)
+ option(numpartitions,4)
+ load()
+
+ orderitems.write.csv("path")
+
+ data frames operations:-
+
+ spark.sql("show tables")
+ spark.sql("select * from table1").createTempView("viewname")
+ spark.sql(select * from orders).show()
+
+
+
+order.withColumn("order_month",substring('order_date',1,7)).show()
+
+
+orders.drop(order_id)
+orders.substring('order_date',1,7).alias("order_month")
+
+orders.filter("order_status=='compelte'").show()
+
+orders.filter("order_status in('complete','closed')
+
+order.filter("order_status in('complete','closed') and order_month like '2013-08%'")
+
+orderitem.
+filter('orders.order_items_subtotal<>order_itemquantity*product_price').select("order_items").show()
+
+
+orders.filter("substring(order_date,9,2)=='01')
+orders.filter("date_format(order_date,'dd')=='01'")
+
+orders.
+join(orderitems,orders.order_id==orderitems.order_id,"inner")
+
+
+
